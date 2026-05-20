@@ -92,6 +92,9 @@ export abstract class BaseAgent {
   /** Whether a fallback was used during this cycle. */
   private fallbackUsedInCycle: boolean = false;
 
+  /** Registry of tools available to this agent. */
+  protected readonly tools: Map<string, any> = new Map();
+
   /**
    * Create a new agent instance.
    *
@@ -109,6 +112,16 @@ export abstract class BaseAgent {
       this.eventBus.subscribe(pattern, async (event) => {
         await this.process(event);
       });
+    }
+  }
+
+  /**
+   * Register a tool for use during the ToolUse phase.
+   * @param tool - The tool to register (must have a `name` property).
+   */
+  protected registerTool(tool: any): void {
+    if (tool && tool.name) {
+      this.tools.set(tool.name, tool);
     }
   }
 
