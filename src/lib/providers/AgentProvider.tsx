@@ -39,17 +39,26 @@ export function AgentProvider({ children }: { children: React.ReactNode }) {
     const bus = createEventBus();
     eventBusRef.current = bus;
 
-    // Initialize all 5 autonomous agents
+    // Initialize all 5 autonomous agents with error isolation
     // They auto-subscribe to the event bus in their constructors
-    const agents = [
-      createOpportunityMatcher(bus),
-      createFairWageNegotiator(bus),
-      createSafetyGuardian(bus),
-      createFinancialProtector(bus),
-      createUpskillingCoach(bus),
+    const agents: any[] = [];
+    const agentFactories = [
+      { name: 'OpportunityMatcher', create: () => createOpportunityMatcher(bus) },
+      { name: 'FairWageNegotiator', create: () => createFairWageNegotiator(bus) },
+      { name: 'SafetyGuardian', create: () => createSafetyGuardian(bus) },
+      { name: 'FinancialProtector', create: () => createFinancialProtector(bus) },
+      { name: 'UpskillingCoach', create: () => createUpskillingCoach(bus) },
     ];
 
-    console.log(`[AgentProvider] ${agents.length} agents initialized successfully.`);
+    for (const factory of agentFactories) {
+      try {
+        agents.push(factory.create());
+      } catch (err) {
+        console.warn(`[AgentProvider] ${factory.name} failed to initialize:`, err);
+      }
+    }
+
+    console.log(`[AgentProvider] ${agents.length}/5 agents initialized successfully.`);
     setIsReady(true);
 
     return () => {

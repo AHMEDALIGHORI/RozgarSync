@@ -125,6 +125,22 @@ export abstract class BaseAgent {
     }
   }
 
+  /**
+   * Initialize the agent. Called by factory functions after construction.
+   * Subclasses can override to perform async setup.
+   */
+  initialize(): void {
+    // Base implementation is a no-op; subclasses may override.
+  }
+
+  /**
+   * Gracefully shut down the agent.
+   * Subclasses can override for cleanup.
+   */
+  shutdown(): void {
+    // Base implementation is a no-op; subclasses may override.
+  }
+
   // --------------------------------------------------------------------------
   // TEMPLATE METHOD â€” Main Processing Pipeline
   // --------------------------------------------------------------------------
