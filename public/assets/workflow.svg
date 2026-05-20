@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="360" viewBox="0 0 1200 360">
+  <defs>
+    <style>
+      .bg { fill: #070707; }
+      .node { fill: #0b1220; stroke: #1f6feb; stroke-width: 2; rx: 10; }
+      .label { fill: #e6eefc; font-family: Inter,Helvetica,Arial; font-size:14px; }
+      .small { font-size:12px; fill:#9fbffb }
+      .arrow { stroke: #6fb1ff; stroke-width:2; fill:none; marker-end: url(#arrowhead); }
+      .dot { fill: #ffd166; stroke: #ffc857; stroke-width:1; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#6fb1ff" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="100%" height="100%" rx="8"/>
+
+  <!-- Nodes -->
+  <g transform="translate(60,48)">
+    <rect class="node" x="0" y="0" width="180" height="56" />
+    <text class="label" x="14" y="34">Orchestrator API</text>
+    <text class="small" x="14" y="50">/api/agent-orchestrate</text>
+  </g>
+
+  <g transform="translate(300,28)">
+    <rect class="node" x="0" y="0" width="160" height="72" />
+    <text class="label" x="12" y="28">MatchingAgent</text>
+    <text class="small" x="12" y="46">skill match • geo filter</text>
+  </g>
+
+  <g transform="translate(520,28)">
+    <rect class="node" x="0" y="0" width="160" height="72" />
+    <text class="label" x="12" y="28">VerificationAgent</text>
+    <text class="small" x="12" y="46">CNIC • credentials</text>
+  </g>
+
+  <g transform="translate(740,28)">
+    <rect class="node" x="0" y="0" width="160" height="72" />
+    <text class="label" x="12" y="28">PricingAgent</text>
+    <text class="small" x="12" y="46">market rate engine</text>
+  </g>
+
+  <g transform="translate(960,28)">
+    <rect class="node" x="0" y="0" width="160" height="72" />
+    <text class="label" x="12" y="28">CommunicationAgent</text>
+    <text class="small" x="12" y="46">messages • notifications</text>
+  </g>
+
+  <!-- Insights & Trace -->
+  <g transform="translate(300,180)">
+    <rect class="node" x="0" y="0" width="420" height="72" />
+    <text class="label" x="14" y="28">InsightsAgent / Trace Store</text>
+    <text class="small" x="14" y="46">analytics • audit trail</text>
+  </g>
+
+  <!-- Paths -->
+  <path id="p1" class="arrow" d="M240,76 L300,76" />
+  <path id="p2" class="arrow" d="M460,76 L520,76" />
+  <path id="p3" class="arrow" d="M680,76 L740,76" />
+  <path id="p4" class="arrow" d="M900,76 L960,76" />
+
+  <!-- to insights -->
+  <path id="p5" class="arrow" d="M380,100 L380,180" />
+  <path id="p6" class="arrow" d="M600,100 L500,180" />
+  <path id="p7" class="arrow" d="M820,100 L680,180" />
+  <path id="p8" class="arrow" d="M1040,100 L820,208 L740,208" />
+
+  <!-- Animated dot following the main pipeline -->
+  <g>
+    <circle class="dot" r="8" cx="0" cy="0">
+      <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;0.25;0.5;0.75;1" keyTimes="0;0.25;0.5;0.75;1">
+        <mpath xlink:href="#pipeline" />
+      </animateMotion>
+    </circle>
+  </g>
+
+  <!-- Invisible pipeline path (composed) -->
+  <path id="pipeline" d="M240,76 L300,76 L460,76 L520,76 L680,76 L740,76 L900,76 L960,76" fill="none" stroke="transparent" />
+
+  <!-- Highlight pulses on nodes (looping) -->
+  <g>
+    <circle cx="330" cy="64" r="10" fill="#4cc9f0" opacity="0.0">
+      <animate attributeName="opacity" values="0;0.7;0" dur="2s" repeatCount="indefinite" begin="0s"/>
+    </circle>
+    <circle cx="550" cy="64" r="10" fill="#f72585" opacity="0.0">
+      <animate attributeName="opacity" values="0;0.6;0" dur="2.4s" repeatCount="indefinite" begin="0.4s"/>
+    </circle>
+    <circle cx="770" cy="64" r="10" fill="#b5179e" opacity="0.0">
+      <animate attributeName="opacity" values="0;0.6;0" dur="2s" repeatCount="indefinite" begin="0.8s"/>
+    </circle>
+    <circle cx="990" cy="64" r="10" fill="#ffd166" opacity="0.0">
+      <animate attributeName="opacity" values="0;0.7;0" dur="2.6s" repeatCount="indefinite" begin="1.2s"/>
+    </circle>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(24,280)">
+    <text class="small">Flow: Orchestrator → Matching → Verification → Pricing → Communication</text>
+  </g>
+
+</svg>
