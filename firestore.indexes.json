@@ -1,0 +1,462 @@
+{
+  "indexes": [
+    // ====================================================================
+    // GIGS — Status + Geospatial (geohash prefix scan for nearby open gigs)
+    // ====================================================================
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "location.geohash", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // GIGS — Category + Geospatial (find plumbers near me)
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "location.geohash", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // GIGS — Status + Category + Geospatial (open electrical gigs near me)
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "location.geohash", "order": "ASCENDING" }
+      ]
+    },
+
+    // GIGS — Status + City (city-scoped gig listings)
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "city", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // GIGS — Category + City + Recency
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "city", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // GIGS — Employer's own gigs sorted by recency
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "employerId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // GIGS — Employer + Status (employer dashboard: my open/completed gigs)
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "employerId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // GIGS — Assigned worker lookup (worker dashboard: my active gigs)
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "assignedWorkerId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "updatedAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // GIGS — Urgency + Geospatial (emergency gigs nearby)
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "urgency", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "location.geohash", "order": "ASCENDING" }
+      ]
+    },
+
+    // GIGS — Escrow status filter (funded gigs awaiting assignment)
+    {
+      "collectionGroup": "gigs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "escrow.isFunded", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // ====================================================================
+    // USERS — Worker discovery by availability + geospatial
+    // ====================================================================
+
+    // Available workers near a location
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "role", "order": "ASCENDING" },
+        { "fieldPath": "profile.availability.isAvailable", "order": "ASCENDING" },
+        { "fieldPath": "profile.location.geohash", "order": "ASCENDING" }
+      ]
+    },
+
+    // Workers by city + rating (top-rated plumbers in Lahore)
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "role", "order": "ASCENDING" },
+        { "fieldPath": "profile.city", "order": "ASCENDING" },
+        { "fieldPath": "profile.rating", "order": "DESCENDING" }
+      ]
+    },
+
+    // Workers by verification level + geospatial (trusted workers nearby)
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "role", "order": "ASCENDING" },
+        { "fieldPath": "profile.safetyProfile.verificationLevel", "order": "ASCENDING" },
+        { "fieldPath": "profile.location.geohash", "order": "ASCENDING" }
+      ]
+    },
+
+    // Workers by isVerified + city (verified workers in a city)
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "role", "order": "ASCENDING" },
+        { "fieldPath": "profile.isVerified", "order": "ASCENDING" },
+        { "fieldPath": "profile.city", "order": "ASCENDING" },
+        { "fieldPath": "profile.rating", "order": "DESCENDING" }
+      ]
+    },
+
+    // ====================================================================
+    // AGENT DECISION LOGS — Audit & Analytics Indexes
+    // ====================================================================
+
+    // Decision type + timestamp (filter fraud_detection decisions last 7d)
+    {
+      "collectionGroup": "agent_decision_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "decisionType", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+
+    // Session trace (all decisions in one AI session, ordered)
+    {
+      "collectionGroup": "agent_decision_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "sessionTraceId", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "ASCENDING" }
+      ]
+    },
+
+    // Decision type + gig reference (all matching decisions for a gig)
+    {
+      "collectionGroup": "agent_decision_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "decisionType", "order": "ASCENDING" },
+        { "fieldPath": "gigId", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+
+    // Worker-scoped agent decisions (all AI decisions about a worker)
+    {
+      "collectionGroup": "agent_decision_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "workerId", "order": "ASCENDING" },
+        { "fieldPath": "decisionType", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+
+    // Employer-scoped agent decisions
+    {
+      "collectionGroup": "agent_decision_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "employerId", "order": "ASCENDING" },
+        { "fieldPath": "decisionType", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+
+    // Model version + decision type (track performance across model updates)
+    {
+      "collectionGroup": "agent_decision_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "modelId", "order": "ASCENDING" },
+        { "fieldPath": "decisionType", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+
+    // Triggered-by user + timestamp (all AI interactions by a user)
+    {
+      "collectionGroup": "agent_decision_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "triggeredBy", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+
+    // ====================================================================
+    // TRANSACTIONS — Financial Ledger Indexes
+    // ====================================================================
+
+    // Source user's transaction history
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "sourceId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // Destination user's transaction history
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "destinationId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // Transactions by type + status (e.g. all pending escrow_deposits)
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "type", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // Transactions for a specific gig (full escrow lifecycle view)
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "relatedGigId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "ASCENDING" }
+      ]
+    },
+
+    // EOBI contribution tracking (all eobi_contribution type, by worker)
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "type", "order": "ASCENDING" },
+        { "fieldPath": "sourceId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // ====================================================================
+    // REVIEWS — Reputation Indexes
+    // ====================================================================
+
+    // Reviews for a specific user (reviewee), most recent first
+    {
+      "collectionGroup": "reviews",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "revieweeId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // Reviews by a specific user (reviewer)
+    {
+      "collectionGroup": "reviews",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "reviewerId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // Reviews for a gig
+    {
+      "collectionGroup": "reviews",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "gigId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // Flagged reviews for moderation
+    {
+      "collectionGroup": "reviews",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "isFlagged", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // ====================================================================
+    // NOTIFICATIONS — User Inbox
+    // ====================================================================
+
+    // User's notifications, unread first, then by recency
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "isRead", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+
+    // ====================================================================
+    // SERVICES — Directory Listing Indexes
+    // ====================================================================
+
+    // Active services by category + geospatial
+    {
+      "collectionGroup": "services",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "isActive", "order": "ASCENDING" },
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "location.geohash", "order": "ASCENDING" }
+      ]
+    },
+
+    // Featured services, most popular first
+    {
+      "collectionGroup": "services",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "isFeatured", "order": "ASCENDING" },
+        { "fieldPath": "isActive", "order": "ASCENDING" },
+        { "fieldPath": "bookingCount", "order": "DESCENDING" }
+      ]
+    },
+
+    // Services by city + category
+    {
+      "collectionGroup": "services",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "isActive", "order": "ASCENDING" },
+        { "fieldPath": "city", "order": "ASCENDING" },
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "workerRating", "order": "DESCENDING" }
+      ]
+    },
+
+    // ====================================================================
+    // AI JOBS — Processing Queue
+    // ====================================================================
+
+    // User's AI jobs by status
+    {
+      "collectionGroup": "ai_jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    // ====================================================================
+    // FIELD-LEVEL INDEX OVERRIDES
+    // ====================================================================
+    // Disable single-field indexes on high-cardinality fields that are
+    // only ever queried via composite indexes — saves storage + write cost.
+
+    {
+      "collectionGroup": "agent_decision_logs",
+      "fieldPath": "inputHash",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "agent_decision_logs",
+      "fieldPath": "outputHash",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "agent_decision_logs",
+      "fieldPath": "traceChainHash",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "agent_decision_logs",
+      "fieldPath": "rationale",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "transactions",
+      "fieldPath": "integrityHash",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "transactions",
+      "fieldPath": "idempotencyKey",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "transactions",
+      "fieldPath": "metadata",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "gigs",
+      "fieldPath": "description",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "gigs",
+      "fieldPath": "descriptionUrdu",
+      "indexes": []
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">RozgarSync</string>
+    <string name="title_activity_main">RozgarSync</string>
+    <string name="package_name">com.rozgarsync.app</string>
+    <string name="custom_url_scheme">com.rozgarsync.app</string>
+</resources>
