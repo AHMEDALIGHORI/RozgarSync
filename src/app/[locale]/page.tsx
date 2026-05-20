@@ -198,7 +198,7 @@ export default function LandingPage() {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden pt-20 lg:pt-24">
         {/* Particle dot grid background */}
         <ParticleBackground dotCount={100} />
 
@@ -333,78 +333,99 @@ export default function LandingPage() {
           >
             <div className="relative w-full max-w-lg">
               {/* Main glass card */}
-              <div className="glass-premium rounded-2xl p-6 space-y-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-display font-bold text-dark-100">
-                    {t('dashboard.overview')}
-                  </h3>
-                  <span className="flex items-center gap-1.5 text-2xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Live
-                  </span>
+              <div className="glass-premium rounded-2xl p-6 space-y-5">
+                {/* Header */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-display font-bold text-dark-50">
+                      System Overview
+                    </h3>
+                    <p className="text-2xs text-dark-400">Real-time Matching Neural Network</p>
+                  </div>
+                  {/* Avatar cluster */}
+                  <div className="flex -space-x-2.5">
+                    <div className="w-8 h-8 rounded-full border-2 border-dark-900 overflow-hidden bg-dark-800 flex items-center justify-center text-2xs text-dark-400">
+                      👨‍💻
+                    </div>
+                    <div className="w-8 h-8 rounded-full border-2 border-dark-900 overflow-hidden bg-dark-800 flex items-center justify-center text-2xs text-dark-400">
+                      👩‍💼
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-brand-500 border-2 border-dark-900 flex items-center justify-center text-dark-950 font-bold text-2xs">
+                      +12k
+                    </div>
+                  </div>
                 </div>
 
-                {/* Mock stat cards */}
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { label: t('dashboard.totalWorkers'), value: 12450, icon: Users, color: 'text-brand-400', bgColor: 'bg-brand-500/10' },
-                    { label: t('dashboard.totalServices'), value: 3280, icon: Briefcase, color: 'text-emerald-400', bgColor: 'bg-emerald-500/10' },
-                    { label: t('dashboard.activeBookings'), value: 847, icon: Calendar, color: 'text-blue-400', bgColor: 'bg-blue-500/10' },
-                    { label: t('dashboard.revenue'), value: 2.4, icon: TrendingUp, color: 'text-amber-400', bgColor: 'bg-amber-500/10' },
-                  ].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      className="bg-dark-900/60 rounded-xl p-3 border border-dark-700/30 hover:border-dark-600/50 transition-colors"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.8 + i * 0.1 }}
-                    >
-                      <div className={`w-7 h-7 rounded-lg ${item.bgColor} flex items-center justify-center mb-2`}>
-                        <item.icon className={`w-3.5 h-3.5 ${item.color}`} />
+                {/* Stats Row */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Card 1: Active Matches */}
+                  <div className="bg-white/[0.03] rounded-xl p-4 border border-white/5 relative overflow-hidden">
+                    <p className="text-dark-400 text-3xs font-semibold mb-1 uppercase tracking-wider">Active Matches</p>
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-2xl font-bold font-mono text-dark-50">1,240</span>
+                      <span className="text-emerald-400 text-3xs flex items-center font-bold">
+                        <TrendingUp className="w-2.5 h-2.5 mr-0.5" /> +12%
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-brand-400/80 mt-2 font-urdu" dir="rtl">آج کے فعال جوڑے</p>
+                  </div>
+
+                  {/* Card 2: Revenue Projection */}
+                  <div className="bg-white/[0.03] rounded-xl p-4 border border-white/5 relative overflow-hidden h-[82px]">
+                    <p className="text-dark-400 text-3xs font-semibold mb-1 uppercase tracking-wider">Neural Efficiency</p>
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-2xl font-bold font-mono text-dark-50">94.2%</span>
+                    </div>
+                    {/* Glowing Sparkline SVG */}
+                    <div className="absolute bottom-0 left-0 w-full h-7 overflow-hidden pointer-events-none">
+                      <div className="w-full h-full bg-gradient-to-t from-brand-500/10 to-transparent absolute bottom-0" />
+                      <svg className="w-full h-full absolute bottom-1 px-1" viewBox="0 0 100 20" preserveAspectRatio="none">
+                        <path
+                          d="M0 20 L10 15 L20 18 L30 10 L40 12 L50 5 L60 8 L70 3 L80 10 L90 5 L100 12"
+                          fill="none"
+                          stroke="#22C55E"
+                          strokeWidth="1.5"
+                          className="animate-pulse"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Recent Orchestrations */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-3xs font-bold text-dark-400 uppercase tracking-widest px-1">
+                    <span>Recent Orchestrations</span>
+                    <span>Status</span>
+                  </div>
+                  <div className="space-y-2">
+                    {/* Orchestration 1 */}
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors border border-white/5">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center border border-white/5">
+                          <Bot className="w-4 h-4 text-brand-400" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-dark-100">Node: Karachi-01</p>
+                          <p className="text-3xs text-dark-400">Match: Cloud Architect</p>
+                        </div>
                       </div>
-                      <p className="text-lg font-bold text-dark-50">
-                        {i === 3 ? (
-                          <><span className="text-xs font-normal text-dark-400">PKR </span><AnimatedCounter value={item.value} suffix="M" decimals={1} duration={1500} /></>
-                        ) : (
-                          <AnimatedCounter value={item.value} duration={1500} />
-                        )}
-                      </p>
-                      <p className="text-2xs text-dark-400 mt-0.5">{item.label}</p>
-                    </motion.div>
-                  ))}
-                </div>
+                      <span className="flex h-2 w-2 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(34,197,94,0.8)]" />
+                    </div>
 
-                {/* Mock chart area */}
-                <div className="h-28 bg-dark-900/40 rounded-xl border border-dark-700/20 flex items-end justify-around px-4 pb-3 pt-4 relative overflow-hidden">
-                  {/* Grid lines */}
-                  <div className="absolute inset-0 flex flex-col justify-between py-3 px-4 pointer-events-none">
-                    {[...Array(4)].map((_, i) => (
-                      <div key={i} className="w-full h-px bg-dark-700/20" />
-                    ))}
-                  </div>
-                  {[40, 65, 45, 80, 55, 90, 70, 85, 60].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      className="w-3 rounded-t-md bg-gradient-to-t from-brand-500 to-emerald-400 relative"
-                      initial={{ height: 0 }}
-                      animate={{ height: `${h}%` }}
-                      transition={{ delay: 1.2 + i * 0.05, duration: 0.6, ease: 'easeOut' }}
-                    >
-                      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-emerald-400 opacity-0 animate-pulse" style={{ animationDelay: `${i * 200}ms` }} />
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* AI Agent indicator */}
-                <div className="flex items-center justify-between pt-1">
-                  <div className="flex items-center gap-2">
-                    <Bot className="w-3.5 h-3.5 text-brand-400" />
-                    <span className="text-2xs text-dark-300">5 AI Agents Active</span>
-                  </div>
-                  <div className="flex -space-x-1">
-                    {['bg-brand-400', 'bg-emerald-400', 'bg-blue-400', 'bg-amber-400', 'bg-purple-400'].map((color, i) => (
-                      <div key={i} className={`w-4 h-4 rounded-full ${color} border-2 border-dark-900`} />
-                    ))}
+                    {/* Orchestration 2 */}
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors border border-white/5">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center border border-white/5">
+                          <Activity className="w-4 h-4 text-brand-400" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-dark-100">Node: Lahore-Beta</p>
+                          <p className="text-3xs text-dark-400">Match: Data Scientist</p>
+                        </div>
+                      </div>
+                      <span className="flex h-2 w-2 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(34,197,94,0.8)] animate-pulse" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -672,6 +693,175 @@ export default function LandingPage() {
                     <span className="text-emerald-400 text-xs font-mono">❯</span>
                     <span className="w-1.5 h-4 bg-emerald-400 animate-pulse" />
                   </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== NATIONWIDE NODE INFRASTRUCTURE ===== */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-950 via-dark-900/40 to-dark-950" />
+        {/* Background grid pattern */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMikiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==')] opacity-60" />
+        
+        <div className="section-container relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-medium mb-4">
+              <Globe className="w-3 h-3 animate-spin-slow" />
+              Edge Computing Grid
+            </span>
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
+              Nationwide Node Infrastructure
+            </h2>
+            <p className="text-dark-400 max-w-2xl mx-auto">
+              Our regional nodes coordinate matching, verification, and escrow releases locally to guarantee sub-second response times and complete offline capability.
+            </p>
+            <div className="w-24 h-1 mx-auto rounded-full gradient-brand-bg mt-6" />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Node Lists */}
+            <div className="space-y-4">
+              {[
+                {
+                  id: 'KHI_01',
+                  name: 'Karachi Central Hub (01)',
+                  type: 'Master Orchestrator',
+                  latency: '12ms',
+                  status: 'Active',
+                  details: 'Coordinating Sindh & Coastal region. 4.2k active connections.',
+                  color: 'bg-emerald-500',
+                  glow: 'shadow-[0_0_12px_rgba(16,185,129,0.6)]'
+                },
+                {
+                  id: 'LHE_02',
+                  name: 'Lahore Neural Cluster (02)',
+                  type: 'Worker Verification Node',
+                  latency: '18ms',
+                  status: 'Active',
+                  details: 'Handling Punjab central database, local CNIC scans, and skill tests.',
+                  color: 'bg-emerald-500',
+                  glow: 'shadow-[0_0_12px_rgba(16,185,129,0.6)]'
+                },
+                {
+                  id: 'ISB_03',
+                  name: 'Islamabad Edge Gateway (03)',
+                  type: 'Secure Escrow Ledger',
+                  latency: '15ms',
+                  status: 'Active',
+                  details: 'Connecting federal services, secure banking gateways, and APIs.',
+                  color: 'bg-emerald-500',
+                  glow: 'shadow-[0_0_12px_rgba(16,185,129,0.6)] animate-pulse'
+                }
+              ].map((node, i) => (
+                <motion.div
+                  key={node.id}
+                  className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-brand-500/20 transition-all duration-300 flex items-start gap-4 relative overflow-hidden group"
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-brand-500/5 rounded-full blur-2xl group-hover:bg-brand-500/10 transition-colors" />
+                  
+                  {/* Status Indicator */}
+                  <div className="mt-1 flex-shrink-0">
+                    <span className={`flex h-3 w-3 rounded-full ${node.color} ${node.glow}`} />
+                  </div>
+
+                  <div className="space-y-1 relative z-10 flex-1">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h3 className="text-base font-display font-bold text-dark-50">
+                        {node.name}
+                      </h3>
+                      <span className="text-[10px] font-mono bg-brand-500/10 text-brand-300 px-2 py-0.5 rounded-full border border-brand-500/20">
+                        {node.id}
+                      </span>
+                    </div>
+                    <p className="text-xs text-dark-300 font-medium">{node.type}</p>
+                    <p className="text-xs text-dark-400 mt-2">{node.details}</p>
+                    <div className="flex gap-4 pt-3 text-[10px] font-mono text-dark-400">
+                      <span>Latency: <span className="text-brand-400">{node.latency}</span></span>
+                      <span>Sync Rate: <span className="text-emerald-400">99.9%</span></span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Right: Graphic Map representation */}
+            <motion.div
+              className="glass-premium rounded-3xl p-6 border border-white/5 h-[420px] flex flex-col justify-between relative overflow-hidden"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              {/* Grid backdrop */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.05),transparent_60%)]" />
+
+              {/* Dynamic Network Graph */}
+              <div className="h-56 relative flex items-center justify-center border-b border-white/5 pb-4">
+                <svg className="w-full h-full max-w-sm" viewBox="0 0 200 200">
+                  {/* Grid background circles */}
+                  <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.02)" strokeDasharray="4 4" />
+                  <circle cx="100" cy="100" r="50" fill="none" stroke="rgba(255,255,255,0.02)" strokeDasharray="4 4" />
+                  
+                  {/* Connection Lines */}
+                  <line x1="60" y1="140" x2="130" y2="110" stroke="rgba(16,185,129,0.3)" strokeWidth="1.5" strokeDasharray="4 4" className="animate-pulse" />
+                  <line x1="130" y1="110" x2="100" y2="50" stroke="rgba(16,185,129,0.3)" strokeWidth="1.5" strokeDasharray="4 4" className="animate-pulse" />
+                  <line x1="60" y1="140" x2="100" y2="50" stroke="rgba(16,185,129,0.3)" strokeWidth="1.5" strokeDasharray="4 4" className="animate-pulse" />
+                  
+                  {/* Active node paths */}
+                  <path d="M 60 140 L 130 110 L 100 50 Z" fill="rgba(16,185,129,0.02)" />
+
+                  {/* Node 1: Karachi */}
+                  <g className="cursor-pointer group">
+                    <circle cx="60" cy="140" r="6" fill="#10B981" className="animate-ping opacity-30" style={{ animationDuration: '3s' }} />
+                    <circle cx="60" cy="140" r="4" fill="#10B981" />
+                    <text x="45" y="155" fill="#9CA3AF" fontSize="8" fontFamily="sans-serif">KHI (01)</text>
+                  </g>
+
+                  {/* Node 2: Lahore */}
+                  <g className="cursor-pointer group">
+                    <circle cx="130" cy="110" r="6" fill="#10B981" className="animate-ping opacity-30" style={{ animationDuration: '2.5s' }} />
+                    <circle cx="130" cy="110" r="4" fill="#10B981" />
+                    <text x="135" y="115" fill="#9CA3AF" fontSize="8" fontFamily="sans-serif">LHE (02)</text>
+                  </g>
+
+                  {/* Node 3: Islamabad */}
+                  <g className="cursor-pointer group">
+                    <circle cx="100" cy="50" r="6" fill="#10B981" className="animate-ping opacity-30" style={{ animationDuration: '4s' }} />
+                    <circle cx="100" cy="50" r="4" fill="#10B981" />
+                    <text x="90" y="40" fill="#9CA3AF" fontSize="8" fontFamily="sans-serif">ISB (03)</text>
+                  </g>
+                </svg>
+              </div>
+
+              {/* Status Log Console */}
+              <div className="flex-1 pt-4 font-mono text-[10px] space-y-1.5 text-dark-400 overflow-y-auto max-h-[140px]">
+                <div className="flex gap-2">
+                  <span className="text-dark-500">[09:12:44]</span>
+                  <span className="text-brand-400">ISB_EDGE:</span>
+                  <span className="text-dark-200">System Ready. Ledger sync complete.</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-dark-500">[09:12:45]</span>
+                  <span className="text-brand-400">KHI_CENTRAL:</span>
+                  <span className="text-dark-200">Active Matching Mode. Listening on port 8080.</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-dark-500">[09:12:46]</span>
+                  <span className="text-brand-400">LHE_CLUSTER:</span>
+                  <span className="text-dark-200">Synced regional registry. Latency nominal.</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-dark-500">[09:12:47]</span>
+                  <span className="text-emerald-400 font-bold">[SYSTEM]</span>
+                  <span className="text-emerald-400">ALL NODES OPERATIONAL. Active sync speed: 10 Gbps.</span>
                 </div>
               </div>
             </motion.div>

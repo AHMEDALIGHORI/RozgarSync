@@ -88,6 +88,7 @@ const nextConfig = {
     ],
   },
   experimental: {
+    turbopack: true,
     optimizePackageImports: ["lucide-react", "framer-motion", "recharts"],
   },
 };

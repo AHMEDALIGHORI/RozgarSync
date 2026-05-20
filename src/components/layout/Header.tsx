@@ -5,6 +5,7 @@
 // ============================================
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,7 +13,6 @@ import { Menu, X, User as UserIcon, LogOut, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/lib/providers/AuthProvider';
 import { LocaleSwitcher } from './LocaleSwitcher';
-import { Button } from '../ui/Button';
 
 export function Header() {
   const t = useTranslations('nav');
@@ -115,7 +115,7 @@ export function Header() {
               <Link href="/profile" className="flex items-center gap-2 text-sm text-dark-200 hover:text-brand-400 transition-colors">
                 <div className="w-8 h-8 rounded-full bg-dark-800 border border-dark-600 flex items-center justify-center overflow-hidden ring-2 ring-transparent hover:ring-brand-500/30 transition-all">
                   {user.photoURL ? (
-                    <img src={user.photoURL} alt="User avatar" className="w-full h-full object-cover" />
+                    <Image src={user.photoURL} alt="User avatar" width={32} height={32} className="w-full h-full object-cover" />
                   ) : (
                     <UserIcon className="w-4 h-4 text-dark-400" />
                   )}
@@ -134,10 +134,13 @@ export function Header() {
               <Link href="/login" className="text-sm font-medium text-dark-200 hover:text-brand-400 transition-colors">
                 {t('login')}
               </Link>
-              <Button size="sm" onClick={() => {}}>
+              <Link
+                href="/login?mode=signup"
+                className="inline-flex h-9 items-center justify-center gap-2 rounded-xl bg-brand-500 px-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-brand-600 hover:no-underline"
+              >
                 <Sparkles className="w-3.5 h-3.5 mr-1.5" />
                 {t('register')}
-              </Button>
+              </Link>
             </div>
           )}
         </div>
@@ -239,8 +242,18 @@ export function Header() {
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-4 pt-2">
-                  <Button variant="secondary" fullWidth>{t('login')}</Button>
-                  <Button fullWidth>{t('register')}</Button>
+                  <Link
+                    href="/login"
+                    className="inline-flex h-11 items-center justify-center rounded-xl border border-dark-600 bg-dark-800 px-5 text-sm font-medium text-dark-100 transition-colors hover:bg-dark-700 hover:no-underline"
+                  >
+                    {t('login')}
+                  </Link>
+                  <Link
+                    href="/login?mode=signup"
+                    className="inline-flex h-11 items-center justify-center rounded-xl bg-brand-500 px-5 text-sm font-medium text-white transition-colors hover:bg-brand-600 hover:no-underline"
+                  >
+                    {t('register')}
+                  </Link>
                 </div>
               )}
             </motion.div>

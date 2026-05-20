@@ -1,5 +1,5 @@
 // ============================================
-// Dashboard Layout — Sidebar + Content Area
+// Map Layout — Sidebar + Content Area
 // ============================================
 
 'use client';
@@ -8,12 +8,11 @@ import { Sidebar } from '@/components/layout/Sidebar';
 import { AuthGuard } from '@/components/auth/AuthGuard';
 import { useEffect } from 'react';
 
-export default function DashboardLayout({
+export default function MapLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Hide the parent Header and Footer inside the dashboard
   useEffect(() => {
     const header = document.querySelector('header');
     const footer = document.querySelector('footer');

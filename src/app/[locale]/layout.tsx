@@ -4,8 +4,8 @@
 
 import type { Metadata } from 'next';
 import { Inter, Outfit, Noto_Nastaliq_Urdu } from 'next/font/google';
-import { NextIntlClientProvider, useMessages } from 'next-intl';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { locales, localeDirections, type Locale } from '@/i18n/i18n';
 import { Providers } from '@/lib/providers/Providers';
 import { Header } from '@/components/layout/Header';
@@ -63,7 +63,7 @@ export async function generateMetadata({
 }
 
 // --- Layout Component ---
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params: { locale },
 }: {
@@ -71,13 +71,13 @@ export default function LocaleLayout({
   params: { locale: string };
 }) {
   // Enable static rendering for this locale
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
   // Determine text direction
   const direction = localeDirections[locale as Locale] ?? 'rtl';
 
   // Get all messages for the client provider
-  const messages = useMessages();
+  const messages = await getMessages();
 
   return (
     <html lang={locale} dir={direction} suppressHydrationWarning>

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function ProfilePage() {
   return (
-    <div className="min-h-screen bg-dark-950 p-4 md:p-8">
+    <div className="min-h-screen bg-dark-950 pt-24 pb-8 px-4 md:pt-28 md:pb-12 md:px-8">
       <div className="max-w-2xl mx-auto space-y-6">
         
         <header className="flex items-center gap-6 bg-dark-900 border border-dark-800 rounded-2xl p-6 md:p-8">

@@ -77,7 +77,7 @@ export default function AgentDashboard() {
       <div className="absolute inset-0 bg-mesh-pattern opacity-20 pointer-events-none" />
       
       <div className="max-w-6xl mx-auto relative z-10 space-y-8">
-        <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-dark-800 pb-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-dark-800 pb-6">
           <div>
             <h1 className="text-3xl font-display font-bold text-white">Agent Command Center</h1>
             <p className="text-dark-400 mt-1">Autonomous orchestration for your gig ecosystem</p>
@@ -87,7 +87,7 @@ export default function AgentDashboard() {
               Judge Demo Mode
             </Link>
           </div>
-        </header>
+        </div>
 
         {/* Top Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

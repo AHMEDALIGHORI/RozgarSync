@@ -17,7 +17,9 @@ interface ProvidersProps {
  * Composite provider that wraps the app with all required context providers.
  * Add new providers here as the app grows (theme, toast, query client, etc.).
  */
-export function Providers({ children }: ProvidersProps) {
+export function Providers({ children, locale }: ProvidersProps) {
+  // locale is available for future use (e.g. passing to theme/i18n providers)
+  void locale;
   return (
     <AgentProvider>
       <AuthProvider>

@@ -6,6 +6,7 @@
 // ServiceCard Component
 // ============================================
 
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { MapPin, Star, User as UserIcon } from 'lucide-react';
@@ -39,10 +40,11 @@ export function ServiceCard({ service, locale = 'ur' }: ServiceCardProps) {
       {/* Image Area */}
       <div className="relative h-48 w-full overflow-hidden bg-dark-800">
         {service.images?.[0] ? (
-          <img
+          <Image
             src={service.images[0]}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            alt={title ?? ''}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-dark-800 to-dark-900">
@@ -95,7 +97,7 @@ export function ServiceCard({ service, locale = 'ur' }: ServiceCardProps) {
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-dark-800 overflow-hidden border border-dark-700 shrink-0">
               {service.workerPhotoURL ? (
-                <img src={service.workerPhotoURL} alt={service.workerName} className="w-full h-full object-cover" />
+                <Image src={service.workerPhotoURL} alt={service.workerName ?? ''} width={32} height={32} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <UserIcon className="w-4 h-4 text-dark-400" />

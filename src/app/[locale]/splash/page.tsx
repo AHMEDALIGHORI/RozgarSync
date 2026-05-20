@@ -12,12 +12,21 @@ export default function SplashPage() {
 
   useEffect(() => {
     setMounted(true);
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    if (header) header.style.display = 'none';
+    if (footer) footer.style.display = 'none';
+
     // Redirect to onboarding after 3 seconds
     const timer = setTimeout(() => {
       router.push(`/${locale}/onboarding`);
     }, 3500);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (header) header.style.display = '';
+      if (footer) footer.style.display = '';
+    };
   }, [router, locale]);
 
   if (!mounted) return null;

@@ -14,12 +14,12 @@ export default function WalletPage() {
       setBalance(24500);
       setEobiTotal(12450);
       setIsLoaded(true);
-    }, 800);
+    }, 250);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="min-h-screen bg-dark-950 p-4 md:p-8">
+    <div className="min-h-screen bg-dark-950 pt-24 pb-8 px-4 md:pt-28 md:pb-12 md:px-8">
       <div className="max-w-4xl mx-auto space-y-6">
         
         {/* Header */}

@@ -15,7 +15,7 @@ export default function SafetyCenterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-950 p-4 md:p-8 relative overflow-hidden">
+    <div className="min-h-screen bg-dark-950 pt-24 pb-8 px-4 md:pt-28 md:pb-12 md:px-8 relative overflow-hidden">
       
       {/* SOS Active Background Pulse */}
       <AnimatePresence>

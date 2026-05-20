@@ -7,6 +7,7 @@
 // ============================================
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -125,7 +126,7 @@ export function Sidebar() {
         <div className={cn("flex items-center gap-3", isCollapsed ? "justify-center" : "px-2")}>
           <div className="w-10 h-10 rounded-full bg-dark-800 border border-dark-600 flex items-center justify-center shrink-0 overflow-hidden">
             {user?.photoURL ? (
-              <img src={user.photoURL} alt="Avatar" className="w-full h-full object-cover" />
+              <Image src={user.photoURL} alt="Avatar" width={40} height={40} className="w-full h-full object-cover" />
             ) : (
               <UserIcon className="w-5 h-5 text-dark-400" />
             )}

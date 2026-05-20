@@ -32,7 +32,9 @@ export async function signInWithEmail(
   email: string,
   password: string
 ): Promise<UserCredential> {
-  return signInWithEmailAndPassword(auth, email, password);
+  const result = await signInWithEmailAndPassword(auth, email, password);
+  await createUserDocument(result.user);
+  return result;
 }
 
 // Register with Email/Password
@@ -73,6 +75,7 @@ async function createUserDocument(
       photoURL: user.photoURL ?? "",
       role: "worker",
       locale: "ur",
+      isActive: true,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
       profile: {
@@ -80,8 +83,16 @@ async function createUserDocument(
         city: "",
         skills: [],
         rating: 0,
+        totalReviews: 0,
         completedJobs: 0,
         isVerified: false,
+        safetyProfile: {
+          isBackgroundChecked: false,
+          verificationLevel: "basic",
+          incidentCount: 0,
+          resolvedIncidentCount: 0,
+          safetyScore: 70,
+        },
       },
     });
   }

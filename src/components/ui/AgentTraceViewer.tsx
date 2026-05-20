@@ -24,7 +24,15 @@ export function AgentTraceViewer({ logs, className }: AgentTraceViewerProps) {
 
   // Sort logs oldest first for the chain visualization
   const sortedLogs = [...logs].sort(
-    (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+    (a, b) => {
+      const aTime = a.timestamp && typeof a.timestamp === 'object' && 'toDate' in a.timestamp
+        ? (a.timestamp as { toDate: () => Date }).toDate().getTime()
+        : new Date(a.timestamp as unknown as string).getTime();
+      const bTime = b.timestamp && typeof b.timestamp === 'object' && 'toDate' in b.timestamp
+        ? (b.timestamp as { toDate: () => Date }).toDate().getTime()
+        : new Date(b.timestamp as unknown as string).getTime();
+      return aTime - bTime;
+    }
   );
 
   return (
@@ -92,7 +100,12 @@ export function AgentTraceViewer({ logs, className }: AgentTraceViewerProps) {
                         </span>
                       </div>
                       <span className="text-xs text-dark-400">
-                        {format(new Date(log.timestamp), 'HH:mm:ss.SSS')}
+                        {format(
+                          log.timestamp && typeof log.timestamp === 'object' && 'toDate' in log.timestamp
+                            ? (log.timestamp as { toDate: () => Date }).toDate()
+                            : new Date(log.timestamp as unknown as string),
+                          'HH:mm:ss.SSS'
+                        )}
                       </span>
                     </div>
 

@@ -37,5 +37,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  // The locale layout renders <html> and <body>.
+  // This root layout is a minimal pass-through required by Next.js App Router.
+  return (
+    <html suppressHydrationWarning>
+      <body>{children}</body>
+    </html>
+  );
 }

@@ -5,7 +5,7 @@ import { PulseBadge } from '@/components/ui/PulseBadge';
 
 export default function SkillsCenterPage() {
   return (
-    <div className="min-h-screen bg-dark-950 p-4 md:p-8">
+    <div className="min-h-screen bg-dark-950 pt-24 pb-8 px-4 md:pt-28 md:pb-12 md:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
         
         <header className="flex justify-between items-end border-b border-dark-800 pb-6">

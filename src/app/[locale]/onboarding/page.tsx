@@ -21,7 +21,7 @@ export default function OnboardingPage() {
   const finish = () => router.push(`/${locale}/dashboard`);
 
   return (
-    <div className="min-h-screen bg-dark-950 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-dark-950 flex flex-col items-center justify-center pt-24 pb-8 px-4 md:pt-28 md:pb-12 md:px-8">
       <div className="w-full max-w-md bg-dark-900 border border-dark-800 rounded-2xl shadow-glass-lg overflow-hidden">
         
         {/* Progress Bar */}
