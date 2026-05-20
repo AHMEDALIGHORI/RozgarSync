@@ -1,5 +1,9 @@
 # RozgarSync – AI‑Powered Gig Marketplace
 
+![Animated Workflow](public/assets/workflow.svg)
+
+> For a step‑by‑step animated architecture, see `README_animated.md`.
+
 ## Overview
 RozgarSync is a modern, premium‑styled web application built with **Next.js 14** (app router) that connects informal gig workers in Pakistan with AI‑assisted job listings, marketplace features, and a progressive‑web‑app experience. The UI follows a dark‑theme with glass‑morphism, custom gradients, smooth micro‑animations, and full i18n support for English and Urdu.
 
